@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using StudentsApi.Class;
 using StudentsApi.Context;
 
 
@@ -13,16 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//{
-//    options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
-//}
-//builder.Services.AddTransient<AppDbContext>(_ =>
-//    new MySqlConnection(builder.Configuration.GetConnectionString["Default"]));
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 var app = builder.Build();
 
