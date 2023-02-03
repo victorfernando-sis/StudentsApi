@@ -1,10 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StudentsApi.Models;
 
 namespace StudentsApi.Context
 {
-	public class AppDbContext : DbContext
+	public class AppDbContext : IdentityDbContext<IdentityUser>
 	{
 		public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
 		{
@@ -15,7 +17,9 @@ namespace StudentsApi.Context
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Student>().HasData(
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Student>().HasData(
 				new Student
 				{
 					StudentId = 1,

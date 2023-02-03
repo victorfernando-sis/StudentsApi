@@ -5,6 +5,7 @@ namespace StudentsApi.Models
 {
 	public class Student
 	{
+		[Key]
 		public int StudentId { get; set; }
 
 		[Required]

@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentsApi.Class;
@@ -9,8 +13,10 @@ using StudentsApi.Models;
 
 namespace StudentsApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StudentsController : ControllerBase
     {
         private IStudentService _studentService;
@@ -19,7 +25,6 @@ namespace StudentsApi.Controllers
         {
             _studentService = studentService;
         }
-
         [HttpGet]
         public async Task<ActionResult<IAsyncEnumerable<Student>>> GetStudents()
         {

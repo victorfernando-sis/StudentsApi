@@ -15,7 +15,7 @@ namespace StudentsApi.Class
 
 		Task UpdateStudent(Student student);
 
-        Task DeleteStudent(Student student);
+        Task DeleteStudent(Student student); 
 	}
 }
 
